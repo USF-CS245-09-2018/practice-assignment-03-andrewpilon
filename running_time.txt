@@ -1,0 +1,36 @@
+NAME:	Andrew Pilon
+
+calculate big O for each line, add together and remove coefficients - just take biggest value (in this case, n)
+
+ITERATIVE ~
+
+public int find_min_iterative () {
+		int min = 0;						--> 2, O(1)
+		for(int i=1;i<arr.length;i++) {		--> 5, O(1)
+			if(arr[i]<arr[min]) {			--> 3*n, O(n)
+				min = i;					--> n, O(n)
+			}
+		}
+		return min;							--> 1, O(1)
+	}
+											FINAL --> = O(n)
+
+
+RECURSIVE ~
+
+public int find_min_recursive () {
+		// recursively determines min of array
+		return find_min_recursive_helper(arr, 1, 0); // in order to initialize with min = 0     --> 1, O(1)
+	}
+
+	public int find_min_recursive_helper (double [] arr, int idx, int min) {
+		// actual function
+		if(idx<arr.length) {											--> 2*(n-1), O(n)
+			if(arr[idx]<arr[min]) {										--> 2*(n-1)*3, O(n)
+				return find_min_recursive_helper(arr, idx+1, idx);		--> 2*(n-1)*3*1, O(n)
+			}
+			return find_min_recursive_helper(arr, idx+1, min);			--> 1*(n-1), O(n)
+		}
+		return min;														--> 1, O(1)
+	}
+																		FINAL --> O(n)
